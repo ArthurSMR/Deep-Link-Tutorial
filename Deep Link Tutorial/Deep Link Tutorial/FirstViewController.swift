@@ -21,16 +21,19 @@ class FirstViewController: UIViewController {
         // Enconding secret name as url and with query allowed
         guard let secretNameAsURL = secretNameVC.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         
+        // Creating our app path
         let openAppPath = "tutorial://deep-link?appFirstScreen=\(secretNameAsURL)"
         
+        // openAppPath as URL
         guard let appURL = URL(string: openAppPath) else { return }
         
+        // Present activity controller to share our link
         presentActivityController(url: appURL)
     }
     
     func presentActivityController(url: URL) {
         
-        // This is the message that will be sent
+        // This is the message that will be sent. If you want to send the link with some message, just write below on message variable
         let message = ""
         
         // The share content with the message you want and the URL
