@@ -14,9 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
         guard let _ = (scene as? UIWindowScene) else { return }
         
         for urlContext in connectionOptions.urlContexts {
@@ -25,10 +23,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let host = url.host
             
+            // Link that I'm using: "tutorial://deep-link?appFirstScreen=\(secretNameAsURL)"
+            
+            // The host that we put at the link
             if host == "deep-link" {
                 
                 if let windowScene = scene as? UIWindowScene {
                     
+                    // Here I used this little extension to query a string parameters and check if the appFirstScreen parameters at the URL is "SecretViewController". If is, we can initialize with it.
                     let appFirstScreenParameter = url.getQueryStringParameter(url: url.absoluteString, param: "appFirstScreen")
                     
                     if appFirstScreenParameter == "SecretViewController" {
@@ -39,6 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         let secretVC = storyboard.instantiateViewController(identifier: "secretVC")
                         
+                        // RootViewController will be set as the secretVC
                         window.rootViewController = secretVC
                         self.window = window
                     }
