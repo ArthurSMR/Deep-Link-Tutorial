@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SecretViewController.swift
 //  Deep Link Tutorial
 //
 //  Created by Arthur Rodrigues on 15/06/20.
@@ -8,13 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SecretViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-
-
 }
-
