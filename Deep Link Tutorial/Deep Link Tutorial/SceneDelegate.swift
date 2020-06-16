@@ -19,29 +19,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         for urlContext in connectionOptions.urlContexts {
             
+            // 1 - If entered with URL, we will get it
             let url = urlContext.url
             
             let host = url.host
             
             // Link that I'm using: "tutorial://deep-link?appFirstScreen=\(secretNameAsURL)"
             
-            // The host that we put at the link
+            // 2- Checking if the host that we put at the link is correct
             if host == "deep-link" {
                 
                 if let windowScene = scene as? UIWindowScene {
                     
-                    // Here I used this little extension to query a string parameters and check if the appFirstScreen parameters at the URL is "SecretViewController". If is, we can initialize with it.
+                    // 3 - Here I used this little extension to query a string parameters and check if the appFirstScreen parameters at the URL is "SecretViewController". If is, we can initialize with it.
                     let appFirstScreenParameter = url.getQueryStringParameter(url: url.absoluteString, param: "appFirstScreen")
                     
+                    // 4 - Check if the parameter we received is "SecretViewController"
                     if appFirstScreenParameter == "SecretViewController" {
                         
-                        // Can initialize with SecretViewController
+                        // 5 - Can initialize with SecretViewController
                         let window = UIWindow(windowScene: windowScene)
                         
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         let secretVC = storyboard.instantiateViewController(identifier: "secretVC")
                         
-                        // RootViewController will be set as the secretVC
+                        // 6 - RootViewController will be set as the secretVC
                         window.rootViewController = secretVC
                         self.window = window
                     }
